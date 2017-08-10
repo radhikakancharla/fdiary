@@ -44,6 +44,7 @@
             <th>name</th>
             <th>servings</th>
             <th>calories</th>
+            <th>totalcalories</th>
         </tr>
         
     </thead>
@@ -64,9 +65,11 @@
             <td><%=t.name %></td>
             <td><%=t.servings %></td>
             <td><%=t.calories %></td>
+            <td><%=t.calories * t.servings %></td>
         </tr>
         <% end %>
         
     </tbody>
     <h3>total calories:</h3>
+    <%= @sum %>
 </table>

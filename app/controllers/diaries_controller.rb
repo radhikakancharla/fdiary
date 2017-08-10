@@ -2,6 +2,8 @@ class DiariesController < ApplicationController
   def index
         @diary = Diary.new
         @diaries = Diary.order(id: :desc)
+        @sum=Diary.sum(:calories)
+        
   end
 
   def create
@@ -20,15 +22,13 @@ class DiariesController < ApplicationController
   end
 
   def show
+     
   end
 
   def update
     task=Diary.find(params[:id])
-    task.update(params[:task].permit(:category, :name, :servings, :calories, :date))
+    task.update(params[:diary].permit(:category, :name, :servings, :calories, :date))
     redirect_to diaries_url
-  end
-
-  def update
   end
 
   def destroy
