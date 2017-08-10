@@ -1,0 +1,72 @@
+<h1>Food Diary</h1>
+
+<%= form_with(model: @diary, local: true) do |form| %>
+    <div class="field">
+        <%= form.label :date %>
+        <%= form.date_select :date, id: :diary_date %>
+    </div>
+    <div class="field">
+        <%= form.label :category %>
+        <%= form.select(:category, id: :diary_category) do %>
+            <% ['Lunch', 'Dinner'].each do |cat| %>
+                <%= content_tag(:option, cat, value: cat, selected: @diary.category == cat) %>
+            <% end %>
+        <% end %>
+    </div>
+    <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, id: :diary_title %>
+    </div>
+    <div class="field">
+        <%= form.label :servings %>
+        <%= form.number_field :servings, id: :diary_servings %>
+    </div>
+    
+     <div class="field">
+        <%= form.label :calories %>
+        <%= form.number_field :calories, id: :diary_calories %>
+    </div>
+   
+
+    <div class="field">
+        <%= form.submit %>
+    </div>
+<% end %>
+
+<table>
+    <thead>
+        <tr>
+            <th>edit</th> 
+            <th>delete</th>
+            <th>id</th>
+            <th>date</th>
+            <th>category</th>
+            <th>name</th>
+            <th>servings</th>
+            <th>calories</th>
+        </tr>
+        
+    </thead>
+    <tbody>
+       <% @diaries.each do |t| %>
+        <tr>
+            <td>
+                <%= link_to('edit', edit_diary_path(t)) %>
+            </td>
+            <td>
+                <%= link_to(t, method: :delete) do %>
+                    <img width ="30" height ="30" src="/trash.png" />
+                <% end %>
+            </td>
+            <td><%=t.id %></td>
+            <td><%=t.date %></td>
+            <td><%=t.category %></td>
+            <td><%=t.name %></td>
+            <td><%=t.servings %></td>
+            <td><%=t.calories %></td>
+        </tr>
+        <% end %>
+        
+    </tbody>
+    <h3>total calories:</h3>
+</table>
